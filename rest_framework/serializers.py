@@ -84,12 +84,13 @@ class SerializerOptions(object):
         self.exclude = getattr(meta, 'exclude', ())
 
 
-class BaseSerializer(Field):
+class BaseSerializer(RelatedField):
     class Meta(object):
         pass
 
     _options_class = SerializerOptions
     _dict_class = SortedDictWithMetadata  # Set to unsorted dict for backwards compatability with unsorted implementations.
+    default_read_only = False
 
     def __init__(self, instance=None, data=None, context=None, **kwargs):
         super(BaseSerializer, self).__init__(**kwargs)
